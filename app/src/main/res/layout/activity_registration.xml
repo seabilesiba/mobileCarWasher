@@ -72,7 +72,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/user_email"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
+            android:layout_height="48dp"
             android:layout_below="@id/reg_number"
             android:background="@drawable/edittext"
             android:layout_marginTop="15dp"
