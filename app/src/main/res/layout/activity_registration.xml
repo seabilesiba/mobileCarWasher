@@ -62,7 +62,7 @@
             android:layout_below="@id/company_name"
             android:background="@drawable/edittext"
             android:layout_marginTop="15dp"
-            android:drawablePadding="5dp"
+            android:drawablePadding="6dp"
             android:drawableLeft="@drawable/company_number"
             android:hint="Enter Company registration"
             android:paddingLeft="10dp"
