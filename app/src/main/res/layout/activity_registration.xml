@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Registration">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="35dp"
+
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/cancel"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/logo1"
+            android:layout_marginTop="80dp"
+            android:layout_centerHorizontal="true"
+           />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgLogo"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/signUp"
+            android:layout_marginTop="15dp"
+            android:text="@string/sign_up"
+            android:textColor="#51A8EF"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/company_name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/signUp"
+            android:background="@drawable/edittext"
+            android:hint="@string/company_trading_name"
+            android:paddingStart="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/company"
+            android:inputType="text"
+            />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reg_number"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/company_name"
+            android:background="@drawable/edittext"
+            android:layout_marginTop="15dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/company_number"
+            android:hint="Enter Company registration"
+            android:paddingLeft="10dp"
+            android:inputType="text"
+            />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/reg_number"
+            android:background="@drawable/edittext"
+            android:layout_marginTop="15dp"
+            android:hint="Enter email address"
+            android:paddingLeft="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/mail"
+            android:inputType="textEmailAddress"
+            />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/user_email"
+            android:background="@drawable/edittext"
+            android:layout_marginTop="15dp"
+            android:hint="Password"
+            android:paddingLeft="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/pass"
+            android:inputType="textPassword"
+            />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_confirmation"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/user_password"
+            android:background="@drawable/edittext"
+            android:layout_marginTop="15dp"
+            android:hint="@string/confirm_password"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/pass"
+            android:paddingStart="10dp"
+            android:inputType="textPassword"
+            />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_confirmation"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/chShowPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="Show Password"/>
+
+
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textSize="18sp"
+                app:backgroundTint="#51A8EF"
+                app:cornerRadius="20dp"
+                android:id="@+id/logBtn"
+                />
+            <ProgressBar
+                android:id="@+id/pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
