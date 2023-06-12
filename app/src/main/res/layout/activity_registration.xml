@@ -65,7 +65,7 @@
             android:drawablePadding="6dp"
             android:drawableLeft="@drawable/company_number"
             android:hint="Enter Company registration"
-            android:paddingLeft="10dp"
+            android:paddingLeft="11dp"
             android:inputType="text"
             />
 
