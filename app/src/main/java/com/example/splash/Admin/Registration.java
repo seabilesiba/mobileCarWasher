@@ -1,8 +1,10 @@
-package com.example.splash;
+package com.example.splash.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.splash.R;
 
 public class Registration extends AppCompatActivity {
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="3dp"
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgDriverProfile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/logo1"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/image_background"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtCarName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Car name: Toyota Land Cruser v8"
+                android:layout_toRightOf="@id/imgDriverProfile"
+                android:layout_marginTop="3dp"
+                android:paddingLeft="30dp"/>
+
+            <TextView
+                android:id="@+id/txtDrivePhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Number pate: 123 ABC L"
+                android:layout_below="@id/txtDriveName"
+                android:layout_toRightOf="@id/imgDriverProfile"
+                android:paddingLeft="30dp"/>
+
+            <TextView
+                android:id="@+id/txtCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:layout_below="@id/txtDriveEmail"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="30dp"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

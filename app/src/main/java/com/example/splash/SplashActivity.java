@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+
+import com.example.splash.Admin.LogInActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -24,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this,LogInActivity.class));
+                startActivity(new Intent(SplashActivity.this, ControlActivity.class));
                 finish();
             }
         },3000);

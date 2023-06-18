@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".Admin.LogInActivity">
+    tools:context=".Driver.DriverLoginActivity">
 
 
     <RelativeLayout
@@ -19,8 +19,8 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/Driver"
             android:fontFamily="casual"
-            android:layout_marginTop="20dp"
-            android:text="Owner"
+            android:layout_marginTop="50dp"
+            android:text="Driver"
             android:textColor="#51A8EF"
             android:textSize="25sp"
             android:textStyle="bold"/>
@@ -30,7 +30,7 @@
             android:layout_height="150dp"
             android:src="@drawable/logo1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="70sp"/>
+            android:layout_marginTop="130sp"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -38,8 +38,8 @@
             android:layout_below="@id/imgLogo"
             android:layout_centerHorizontal="true"
             android:id="@+id/signIn"
-            android:fontFamily="casual"
             android:layout_marginTop="15dp"
+            android:fontFamily="casual"
             android:text="@string/sign_in"
             android:textColor="#51A8EF"
             android:textSize="25sp"
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:text="Login"
                 android:textSize="14sp"
-                app:backgroundTint="#51A8EF"
+                app:backgroundTint="@color/my_light_primary"
                 app:cornerRadius="20dp"
                 android:id="@+id/logBtn"
                 />

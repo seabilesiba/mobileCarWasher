@@ -14,6 +14,7 @@
         android:layout_marginStart="35dp"
 
         >
+
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,28 +22,32 @@
             android:id="@+id/txtDriver"
             android:layout_marginTop="15dp"
             android:text="Driver"
-            android:fontFamily="sans-serif"
-            android:textColor="#51A8EF"
+            android:fontFamily="sans-serif"            android:textColor="#51A8EF"
             android:textSize="25dp"
             android:textStyle="bold"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgLogo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/logo1"
-            android:layout_marginTop="50dp"
-            android:layout_centerHorizontal="true"
-           />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="80dp"
+                android:src="@drawable/profile"
+                android:scaleType="centerCrop"
+                android:layout_centerHorizontal="true"/>
+
+
+
+
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imgLogo"
+            android:layout_below="@id/imgProfile"
             android:layout_centerHorizontal="true"
             android:id="@+id/signUp"
-            android:fontFamily="sans-serif"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="15dp"
             android:text="@string/sign_up"
             android:textColor="#51A8EF"
             android:textSize="25dp"
@@ -52,10 +57,10 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
+            android:textSize="13dp"
             android:layout_below="@+id/signUp"
             android:background="@drawable/edittext"
             android:hint="@string/company_trading_name"
-            android:textSize="13dp"
             android:paddingStart="10dp"
             android:drawablePadding="5dp"
             android:drawableLeft="@drawable/company"
@@ -69,10 +74,10 @@
             android:layout_below="@id/company_name"
             android:background="@drawable/edittext"
             android:layout_marginTop="15dp"
+            android:textSize="13dp"
             android:drawablePadding="6dp"
             android:drawableLeft="@drawable/company_number"
             android:hint="Enter Company registration"
-            android:textSize="13dp"
             android:paddingLeft="11dp"
             android:inputType="text"
             />
@@ -84,8 +89,8 @@
             android:layout_below="@id/reg_number"
             android:background="@drawable/edittext"
             android:layout_marginTop="15dp"
-            android:hint="Enter email address"
             android:textSize="13dp"
+            android:hint="Enter email address"
             android:paddingLeft="10dp"
             android:drawablePadding="5dp"
             android:drawableLeft="@drawable/mail"
@@ -114,10 +119,10 @@
             android:background="@drawable/edittext"
             android:layout_marginTop="15dp"
             android:hint="@string/confirm_password"
-            android:textSize="13dp"
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/pass"
             android:paddingStart="10dp"
+            android:textSize="13dp"
             android:inputType="textPassword"
             />
 
@@ -146,13 +151,14 @@
             android:layout_marginTop="0dp">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/logBtn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Register"
                 android:textSize="14sp"
-                app:backgroundTint="#51A8EF"
-                app:cornerRadius="20dp" />
+                android:backgroundTint="@color/my_light_primary"
+                app:cornerRadius="20dp"
+                android:id="@+id/logBtn"
+                />
             <ProgressBar
                 android:id="@+id/pb"
                 android:layout_width="wrap_content"
@@ -169,8 +175,6 @@
             android:id="@+id/txtLogin"
             android:layout_marginTop="0dp"
             android:text="Login"
-            android:textStyle="bold"
-            android:textColor="@color/secondary_text"
             android:textSize="13dp" />
 
     </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.example.splash;
+package com.example.splash.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,7 +26,7 @@ public class LogInActivity extends AppCompatActivity {
         binding.logBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
             }
         });
         binding.googleSignIn.setOnClickListener(new View.OnClickListener() {

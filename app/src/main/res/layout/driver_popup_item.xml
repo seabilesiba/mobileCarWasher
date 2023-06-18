@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#D6D6D6">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/popupbg"
+        android:padding="15dp"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/clear"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right"
+            android:background="@drawable/clear_back"
+            android:src="@drawable/baseline_clear_24"
+            app:tint="@color/black"/>
+
+        <RelativeLayout
+            android:id="@+id/ClientRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgClient"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/client"
+                    android:background="@drawable/image_background"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@id/imgClient"
+                    android:text="Seabi Lesiba"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgClient">
+
+                <FrameLayout
+                    android:id="@+id/frameCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    >
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="5dp"
+                        android:background="@drawable/image_background"
+                        android:backgroundTint="#1eba47"
+                        android:src="@drawable/baseline_phone2_24"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_toRightOf="@id/imgClient"
+                        android:text="call"
+                        android:gravity="center"
+                        android:textSize="13dp"/>
+
+                </FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/frameChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="10dp">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="5dp"
+                    android:background="@drawable/image_background"
+                    android:backgroundTint="#1eba47"
+                    android:src="@drawable/baseline_chat_24"
+                    app:tint="@color/white" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_toRightOf="@id/imgClient"
+                    android:text="chat"
+                    android:gravity="center"
+                    android:textSize="13dp"/>
+
+            </FrameLayout>
+
+            </RelativeLayout>
+            </RelativeLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="You may request up to 3 items each week. This is done so to make it available for everyone! The remaining number of items you make request will be reflected here.
+\n\nRemember to only take what you need.❤"
+            android:textSize="10sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp">
+
+            <TextView
+                android:id="@+id/Skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:background="@drawable/r_button"
+                android:textStyle="bold"
+                android:text="Reject" />
+
+            <TextView
+                android:id="@+id/Gotit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:background="@drawable/btnbg"
+                android:layout_alignParentEnd="true"
+                android:textStyle="bold"
+                android:text="Accept" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
