@@ -13,12 +13,14 @@ import androidx.fragment.app.FragmentTransaction;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
@@ -42,6 +44,7 @@ import com.example.splash.R;
 import com.example.splash.databinding.ActivityDriverHomeBinding;
 import com.example.splash.databinding.ActivityDriverLoginBinding;
 import com.example.splash.databinding.ActivityHomeBinding;
+import com.example.splash.model.RequestData;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.ApiException;
@@ -62,17 +65,25 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.List;
@@ -97,7 +108,7 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
         binding = ActivityDriverHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        CreatepopUpwindow();
+        //CreatepopUpwindow();
         adapter = new ViewAdapter(this);
         // binding.ViewPager.setAdapter(adapter);
 
@@ -135,6 +146,10 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
                 if (item.getItemId() == R.id.logout) {
                     Toast.makeText(DriverHomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
                 }
+                if (item.getItemId() == R.id.AllRequest) {
+                    startActivity(new Intent(getApplicationContext(), AllRequestActivity.class));
+                }
+
 
                 return false;
             }
@@ -216,7 +231,7 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
             public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
 
                 isPermissionGranted = true;
-                Toast.makeText(DriverHomeActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(DriverHomeActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -258,15 +273,48 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
         });*/
 
 
-        LatLng latLng = new LatLng(-23.916041, 29.133656);
-        MarkerOptions markerOptions = new MarkerOptions();
 
-        markerOptions.title("My position");
-        markerOptions.position(latLng);
-        googleMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 0);
-        googleMap.animateCamera(cameraUpdate);
+
+
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("RequstData");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    RequestData requestData = dataSnapshot.getValue(RequestData.class);
+                    double latitude,longitude;
+                    latitude = requestData.getLatitude();
+                    longitude = requestData.getLongitude();
+                    //Uri.parse("google.navigation:q=-23.839890999999998,29.390710999999996&model=1");
+
+
+                    LatLng latLng = new LatLng(latitude, longitude);
+                    MarkerOptions markerOptions = new MarkerOptions();
+
+
+                    markerOptions.title("Client Location \n" );
+                    markerOptions.position(latLng);
+                    googleMap.addMarker(markerOptions);
+
+                    //Toast.makeText(DriverHomeActivity.this, markerOptions.toString(), Toast.LENGTH_SHORT).show();
+
+
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 0);
+                    googleMap.animateCamera(cameraUpdate);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.getUiSettings().setCompassEnabled(true);
@@ -312,7 +360,7 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
                     GteCurrentUpdate();
 
 
-                    Toast.makeText(DriverHomeActivity.this, "Gps is already enabled", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(DriverHomeActivity.this, "Gps is already enabled", Toast.LENGTH_SHORT).show();
 
                 } catch (ApiException e) {
                     if (e.getStatusCode() == LocationSettingsStatusCodes.RESOLUTION_REQUIRED) {
@@ -339,6 +387,7 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
+
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -352,10 +401,10 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-                Toast.makeText(DriverHomeActivity.this, "Location:"+
-                                locationResult.getLastLocation().getLatitude()+": "+
-                                locationResult.getLastLocation().getLongitude() ,
-                        Toast.LENGTH_SHORT).show();
+               // Toast.makeText(DriverHomeActivity.this, "Location:"+
+                //                locationResult.getLastLocation().getLatitude()+": "+
+                  //              locationResult.getLastLocation().getLongitude() ,
+                   //     Toast.LENGTH_SHORT).show();
             }
         }, Looper.getMainLooper());
     }
@@ -374,14 +423,14 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+    public boolean onCreateOptionsMenu(Menu menu_one) {
+        getMenuInflater().inflate(R.menu.menu_one, menu_one);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        /*if (item.getItemId() == R.id.noneMap) {
+        if (item.getItemId() == R.id.noneMap) {
             googleMp.setMapType(GoogleMap.MAP_TYPE_NONE);
         }
         if(item.getItemId() == R.id.normalMap){
@@ -395,7 +444,7 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
         }
         if(item.getItemId() == R.id.mapTerrain){
             googleMp.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        }*/
+        }
         return super.onOptionsItemSelected(item);
 
     }
@@ -417,12 +466,98 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
 
             }
         });
-        TextView Skip ,Gotit;
-        ImageView clear;
+
+
+
+        TextView Skip ,Gotit,userName,location;
+        ImageView clear,profile;
         CircleImageView circleImageView;
         Skip=popUpView.findViewById(R.id.Skip);
         Gotit=popUpView.findViewById(R.id.Gotit);
+        userName =popUpView.findViewById(R.id.txtUsername);
+        location =popUpView.findViewById(R.id.txtLocaton);
+        profile =popUpView.findViewById(R.id.imgClient);
         circleImageView =popUpView.findViewById(R.id.clear);
+
+
+        //Toast.makeText(this, "Lesiba", Toast.LENGTH_SHORT).show();
+
+
+        RequestData requestData = new RequestData();
+
+        String name = requestData.getLocation();
+
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("RequstData");
+        //FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    RequestData requestData1 = dataSnapshot.getValue(RequestData.class);
+
+                    String clientName,clientSurname,clientImage,clientLocation;
+                    clientName = requestData1.getName();
+                    clientSurname = requestData1.getSurname();
+                    clientLocation = requestData1.getLocation();
+                    clientImage = requestData1.getImage();
+
+                    userName.setText(clientSurname+" "+clientName);
+                    location.setText("Location: "+clientLocation);
+
+                    try {
+                        Picasso.get().load(clientImage).into(profile);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(DriverHomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+       /* mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                RequestData requestData = snapshot.getValue(RequestData.class);
+                String clientName,clientSurname,clientImage,clientLocation;
+                if(requestData != null){
+                    clientName = requestData.getName();
+                    clientSurname = requestData.getSurname();
+                    clientLocation = requestData.getLocation();
+                    clientImage = requestData.getImage();
+
+                    userName.setText(clientSurname+" "+clientName);
+                    location.setText("Location: "+clientLocation);
+                    Toast.makeText(getApplicationContext(), "Lesiba", Toast.LENGTH_SHORT).show();
+
+                    try {
+                        Picasso.get().load(clientImage).into(profile);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+                else{
+                    Toast.makeText(DriverHomeActivity.this, "Empty 3", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Toast.makeText(DriverHomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });*/
+
+
         Skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -447,6 +582,7 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 //popupWindow.dismiss();
+                //Toast.makeText(DriverHomeActivity.this, "Lesiba", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

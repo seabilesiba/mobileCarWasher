@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:elevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgClientProfile"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/image_background"
+                />
+            <TextView
+                android:id="@+id/txtClientUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Client Name"
+                android:textColor="@color/secondary_text"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/imgClientProfile"/>
+
+          <!--  <TextView
+                android:id="@+id/txtClientEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Client Email"
+                android:layout_below="@id/txtClientUserName"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/imgClientProfile"/>
+
+
+            <TextView
+                android:id="@+id/txtClientPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Client Phone"
+                android:layout_below="@+id/txtClientEmail"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/imgClientProfile"/>-->
+
+            <TextView
+                android:id="@+id/txtClientLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Client Location"
+                android:textColor="@color/secondary_text"
+                android:textStyle="bold"
+                android:layout_below="@id/txtClientUserName"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/imgClientProfile"/>
+
+            <LinearLayout
+                android:id="@+id/lnContainer"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/txtClientLocation"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layout_toRightOf="@id/imgClientProfile">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAccept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/my_light_primary"
+                    android:text="Accept"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

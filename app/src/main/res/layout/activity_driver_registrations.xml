@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:id="@+id/txtDriver"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="1dp"
             android:text="Driver"
             android:fontFamily="sans-serif"            android:textColor="#51A8EF"
             android:textSize="25dp"
@@ -32,7 +32,7 @@
                 android:id="@+id/imgProfile"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="30dp"
                 android:src="@drawable/profile"
                 android:scaleType="centerCrop"
                 android:layout_centerHorizontal="true"/>
@@ -53,12 +53,55 @@
             android:textSize="25dp"
             android:textStyle="bold"/>
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/company_name"
+            android:id="@+id/DriverName"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textSize="13dp"
-            android:layout_below="@+id/signUp"
+            android:layout_below="@+id/imgProfile"
+            android:background="@drawable/edittext"
+            android:hint="Enter your name"
+            android:paddingStart="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/company"
+            android:inputType="text"
+            />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/DriverSurname"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:textSize="13dp"
+            android:layout_below="@+id/DriverName"
+            android:background="@drawable/edittext"
+            android:hint="Enter your surname"
+            android:paddingStart="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/company"
+            android:inputType="text"
+            />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/DriverPhone"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:textSize="13dp"
+            android:layout_below="@+id/DriverSurname"
+            android:background="@drawable/edittext"
+            android:hint="Enter your phone"
+            android:paddingStart="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/company"
+            android:inputType="text"
+            />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/companyName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:textSize="13dp"
+            android:layout_below="@+id/DriverPhone"
             android:background="@drawable/edittext"
             android:hint="@string/company_trading_name"
             android:paddingStart="10dp"
@@ -68,12 +111,12 @@
             />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_number"
+            android:id="@+id/regNumber"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@id/company_name"
+            android:layout_below="@id/companyName"
             android:background="@drawable/edittext"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:textSize="13dp"
             android:drawablePadding="6dp"
             android:drawableLeft="@drawable/company_number"
@@ -82,13 +125,14 @@
             android:inputType="text"
             />
 
+
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_email"
+            android:id="@+id/DriverEmail"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@id/reg_number"
+            android:layout_below="@id/regNumber"
             android:background="@drawable/edittext"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:textSize="13dp"
             android:hint="Enter email address"
             android:paddingLeft="10dp"
@@ -98,12 +142,12 @@
             />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_password"
+            android:id="@+id/DriverPassword"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@id/user_email"
+            android:layout_below="@id/DriverEmail"
             android:background="@drawable/edittext"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:hint="Password"
             android:textSize="13dp"
             android:paddingLeft="10dp"
@@ -111,26 +155,12 @@
             android:drawableLeft="@drawable/pass"
             android:inputType="textPassword"
             />
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_confirmation"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@id/user_password"
-            android:background="@drawable/edittext"
-            android:layout_marginTop="15dp"
-            android:hint="@string/confirm_password"
-            android:drawablePadding="5dp"
-            android:drawableStart="@drawable/pass"
-            android:paddingStart="10dp"
-            android:textSize="13dp"
-            android:inputType="textPassword"
-            />
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/user_confirmation"
+            android:layout_below="@id/DriverPassword"
             android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
@@ -157,7 +187,7 @@
                 android:textSize="14sp"
                 android:backgroundTint="@color/my_light_primary"
                 app:cornerRadius="20dp"
-                android:id="@+id/logBtn"
+                android:id="@+id/btnRegister"
                 />
             <ProgressBar
                 android:id="@+id/pb"

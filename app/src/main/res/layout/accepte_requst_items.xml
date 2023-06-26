@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:elevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgClientProfile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/image_background"
+                />
+
+            <LinearLayout
+                android:id="@+id/lnViewLocation"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/imgClientProfile"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="3dp"
+                android:gravity="right">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_location_on_24"/>
+
+                <TextView
+                    android:id="@+id/txtVieLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="view"
+                    android:textColor="@color/my_light_primary"
+                    android:layout_marginEnd="20dp"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txtClientUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Client Name"
+                android:textColor="@color/secondary_text"
+                android:layout_below="@id/lnViewLocation"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/imgClientProfile"/>
+
+            <!--  <TextView
+                  android:id="@+id/txtClientEmail"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Client Email"
+                  android:layout_below="@id/txtClientUserName"
+                  android:layout_marginTop="5dp"
+                  android:layout_marginStart="10dp"
+                  android:layout_toRightOf="@id/imgClientProfile"/>
+
+
+              <TextView
+                  android:id="@+id/txtClientPhone"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Client Phone"
+                  android:layout_below="@+id/txtClientEmail"
+                  android:layout_marginTop="5dp"
+                  android:layout_marginStart="10dp"
+                  android:layout_toRightOf="@id/imgClientProfile"/>-->
+
+            <TextView
+                android:id="@+id/txtClientLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Client Location"
+                android:textColor="@color/secondary_text"
+                android:textStyle="bold"
+                android:layout_below="@id/txtClientUserName"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/imgClientProfile"/>
+
+            <LinearLayout
+                android:id="@+id/lnContainer"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/imgClientProfile"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgCall"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:padding="3dp"
+                    android:src="@drawable/baseline_phone2_24"
+                    android:backgroundTint="@color/my_light_primary"
+                    android:background="@drawable/image_background"/>
+
+                <ImageView
+                    android:id="@+id/imgChat"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/baseline_chat_24"
+                    android:padding="3dp"
+                    android:backgroundTint="@color/my_light_primary"
+                    android:background="@drawable/image_background"/>
+
+                </LinearLayout>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

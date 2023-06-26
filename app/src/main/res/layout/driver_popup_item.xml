@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#D6D6D6">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,18 +36,29 @@
                     android:id="@+id/imgClient"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/client"
                     android:background="@drawable/image_background"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@id/imgClient"
-                    android:text="Seabi Lesiba"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+            <TextView
+                android:id="@+id/txtUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@id/imgClient"
+                android:text="Username"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/txtLocaton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/imgClient"
+                android:text="Location"
+                android:layout_below="@id/txtUsername"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <RelativeLayout
                 android:layout_marginTop="20dp"
