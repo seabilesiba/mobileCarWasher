@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.UpdateCarActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/my_light_primary"
+        app:navigationIconTint="@color/white">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:tint="@color/white" />
+
+        <EditText
+            android:id="@+id/inputSearch"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/search_background"
+            android:hint="Type to search"
+            android:drawablePadding="5dp"
+            android:layout_gravity="center"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="14sp"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/txtDriverName"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <RelativeLayout
+        android:id="@+id/rlContainer2"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@id/toolBar"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/profile_background"
+        android:elevation="20dp">
+
+        <TextView
+            android:id="@+id/txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:text="Car items"
+            android:textColor="@color/my_light_primary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/carImage"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/car_image_bag"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/carImage"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/my_light_primary" />
+
+        <TextView
+            android:id="@+id/txtCarN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:layout_marginStart="30dp"
+            android:text="Car Name"
+            android:textColor="@color/my_light_primary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtCarN"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/edt_back"
+            android:drawableLeft="@drawable/baseline_directions_car_24"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/my_light_primary"
+            android:hint="Car Name"
+            android:paddingLeft="10dp"
+            android:textColor="@color/secondary_text"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtCarNP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edtTitle"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Car Number Plate"
+            android:textColor="@color/my_light_primary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtNumPlate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtCarNP"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/edt_back"
+            android:drawableLeft="@drawable/baseline_fiber_pin_24"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/my_light_primary"
+            android:hint="Car Number Plate"
+            android:paddingLeft="10dp"
+            android:textColor="@color/secondary_text"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edtNumPlate"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/my_light_primary"
+                android:drawableLeft="@drawable/baseline_system_update_alt_24"
+                android:text="Update Car" />
+
+            <ProgressBar
+                android:id="@+id/pd"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:indeterminateDrawable="@drawable/progressbar_background2"
+                android:visibility="gone" />
+
+
+        </FrameLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

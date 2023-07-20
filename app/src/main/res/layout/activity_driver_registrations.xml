@@ -22,48 +22,65 @@
             android:id="@+id/txtDriver"
             android:layout_marginTop="1dp"
             android:text="Driver"
-            android:fontFamily="sans-serif"            android:textColor="#51A8EF"
+            android:fontFamily="casual"            android:textColor="#51A8EF"
             android:textSize="25dp"
             android:textStyle="bold"/>
 
 
+
+        <FrameLayout
+            android:id="@+id/layoutImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgProfile"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="30dp"
-                android:src="@drawable/profile"
-                android:scaleType="centerCrop"
-                android:layout_centerHorizontal="true"/>
+                android:background="@drawable/image_background"
+                android:scaleType="centerCrop" />
 
+            <TextView
+                android:id="@+id/textAddImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Add Image"
+                android:textSize="10dp"
+                android:textColor="@color/secondary_text"/>
 
-
-
+        </FrameLayout>
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imgProfile"
             android:layout_centerHorizontal="true"
-            android:id="@+id/signUp"
-            android:layout_marginTop="15dp"
-            android:text="@string/sign_up"
-            android:textColor="#51A8EF"
+            android:id="@+id/txtSignup"
+            android:layout_below="@id/layoutImage"
+            android:layout_marginTop="1dp"
+            android:text="Sign Up"
+            android:fontFamily="casual"            android:textColor="#51A8EF"
             android:textSize="25dp"
             android:textStyle="bold"/>
+
+
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/DriverName"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:textSize="13dp"
-            android:layout_below="@+id/imgProfile"
+            android:layout_below="@+id/txtSignup"
             android:background="@drawable/edittext"
             android:hint="Enter your name"
             android:paddingStart="10dp"
             android:drawablePadding="5dp"
-            android:drawableLeft="@drawable/company"
+            android:drawableTint="@color/my_light_primary"
+            android:drawableLeft="@drawable/baseline_person_24"
             android:inputType="text"
             />
         <com.google.android.material.textfield.TextInputEditText
@@ -77,7 +94,8 @@
             android:hint="Enter your surname"
             android:paddingStart="10dp"
             android:drawablePadding="5dp"
-            android:drawableLeft="@drawable/company"
+            android:drawableTint="@color/my_light_primary"
+            android:drawableLeft="@drawable/baseline_person_2_24"
             android:inputType="text"
             />
 
@@ -92,8 +110,9 @@
             android:hint="Enter your phone"
             android:paddingStart="10dp"
             android:drawablePadding="5dp"
-            android:drawableLeft="@drawable/company"
-            android:inputType="text"
+            android:drawableTint="@color/my_light_primary"
+            android:drawableLeft="@drawable/baseline_phone2_24"
+            android:inputType="phone"
             />
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/companyName"
@@ -122,7 +141,7 @@
             android:drawableLeft="@drawable/company_number"
             android:hint="Enter Company registration"
             android:paddingLeft="11dp"
-            android:inputType="text"
+            android:inputType="number"
             />
 
 
@@ -190,9 +209,11 @@
                 android:id="@+id/btnRegister"
                 />
             <ProgressBar
-                android:id="@+id/pb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/pd"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:indeterminateDrawable="@drawable/progressbar_background2"
                 android:layout_gravity="center"
                 android:visibility="gone"/>
         </FrameLayout>

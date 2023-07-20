@@ -9,13 +9,15 @@
         android:layout_height="80dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/profile"/>
+        android:background="@drawable/image_background"/>
     <TextView
         android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Seabi Lesiba"
         android:layout_marginTop="5dp"
+        android:textColor="@color/my_light_primary"
+        android:textStyle="bold"
         android:layout_marginLeft="16dp"
         android:layout_below="@id/imageProfile"/>
     <View

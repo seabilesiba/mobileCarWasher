@@ -1,13 +1,14 @@
 package com.example.splash.model;
 
 public class DriverData {
-    private String image,driverName,surname,phone,companyName,regNumber,driverEmail,driverPassword;
+    private String image,driverName,surname,phone,companyName,regNumber,driverEmail,driverPassword,uniqueId;
 
     public DriverData() {
     }
 
-    public DriverData(String image, String driverName, String surname, String phone, String companyName,
-                      String regNumber, String driverEmail, String driverPassword) {
+    public DriverData(String image, String driverName, String surname, String phone,
+                      String companyName, String regNumber, String driverEmail,
+                      String driverPassword, String uniqueId) {
         this.image = image;
         this.driverName = driverName;
         this.surname = surname;
@@ -16,6 +17,7 @@ public class DriverData {
         this.regNumber = regNumber;
         this.driverEmail = driverEmail;
         this.driverPassword = driverPassword;
+        this.uniqueId = uniqueId;
     }
 
     public String getImage() {
@@ -80,5 +82,13 @@ public class DriverData {
 
     public void setDriverPassword(String driverPassword) {
         this.driverPassword = driverPassword;
+    }
+
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
     }
 }

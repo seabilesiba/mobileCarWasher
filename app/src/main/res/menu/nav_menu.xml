@@ -33,20 +33,13 @@
 
     <item android:title="Requests">
         <menu>
-            <item
-                android:id="@+id/AllRequest"
-                android:icon="@drawable/accepted_request"
-                android:title="All Request"/>
 
             <item
                 android:id="@+id/Accepted"
                 android:icon="@drawable/accepted_request"
                 android:title="accepted"/>
 
-            <item
-                android:id="@+id/Rejected"
-                android:icon="@drawable/rejected_request"
-                android:title="rejected"/>
+
         </menu>
     </item>
 

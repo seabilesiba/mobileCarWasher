@@ -92,10 +92,10 @@ public class DriverRegistrationsActivity extends AppCompatActivity {
     private void loading(Boolean isLoading) {
         if (isLoading) {
             binding.btnRegister.setVisibility(View.INVISIBLE);
-            binding.pb.setVisibility(View.VISIBLE);
+            binding.pd.setVisibility(View.VISIBLE);
         } else {
             binding.btnRegister.setVisibility(View.VISIBLE);
-            binding.pb.setVisibility(View.INVISIBLE);
+            binding.pd.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -217,7 +217,8 @@ public class DriverRegistrationsActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 DriverData driverData = new DriverData(downloadUrl, driverName, surname, phone, companyName,
-                        regNumber, driverEmail, driverPassword);
+                        regNumber, driverEmail, driverPassword,
+                        FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                 reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(driverData).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

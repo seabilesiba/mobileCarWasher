@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/lnContainer3"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Phone"
+            android:layout_below="@id/imgProfile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:elevation="5dp"
+            android:textSize="14dp"
+            android:paddingLeft="20dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/profile_background"
+            android:textColor="@color/my_dark_primary"
+            android:textStyle="bold">
+
+
+            <LinearLayout
+                android:id="@+id/lnImage"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgDriverProfile"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/logo1"
+                    android:scaleType="centerCrop"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/image_background"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@id/lnImage"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtDriveName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Names: seabi Lesiba"
+                    android:layout_toRightOf="@id/imgDriverProfile"
+                    android:layout_marginTop="3dp"
+                    android:paddingLeft="30dp"/>
+
+                <TextView
+                    android:id="@+id/txtDrivePhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone no.: 012 3456 789"
+                    android:layout_below="@id/txtDriveName"
+                    android:layout_toRightOf="@id/imgDriverProfile"
+                    android:paddingLeft="30dp"/>
+
+                <TextView
+                    android:id="@+id/txtDriveEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email: abc@gmai.com"
+                    android:layout_below="@id/txtDrivePhone"
+                    android:layout_toRightOf="@id/imgDriverProfile"
+                    android:paddingLeft="30dp"/>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -5,14 +5,19 @@
     android:padding="5dp">
 
 
+
+
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvContainer"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="130dp"
         android:elevation="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp">
+            android:layout_height="130dp">
+
+
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgClientProfile"
@@ -32,6 +37,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/imgClientProfile"/>
+
 
           <!--  <TextView
                 android:id="@+id/txtClientEmail"
@@ -71,17 +77,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_below="@id/txtClientLocation"
-                android:orientation="horizontal"
                 android:gravity="right"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/imgClientProfile">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAccept"
+                <FrameLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/my_light_primary"
-                    android:text="Accept"/>
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAccept"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:backgroundTint="@color/my_light_primary"
+                        android:text="Accept"/>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgTick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="40dp"
+                        android:src="@drawable/baseline_check_24"
+                        android:background="@drawable/bg_tick"
+                        android:layout_gravity="right"
+                        android:visibility="gone"
+                        />
+                </FrameLayout>
+
 
 
             </LinearLayout>

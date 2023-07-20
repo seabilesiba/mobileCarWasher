@@ -1,5 +1,7 @@
 package com.example.splash.Driver;
 
+import static com.example.splash.Constants.TOPIC;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,10 +42,15 @@ import android.widget.Toast;
 
 import com.example.splash.Adapters.ViewAdapter;
 import com.example.splash.Admin.HomeActivity;
+import com.example.splash.ApiUtilities;
+import com.example.splash.ControlActivity;
 import com.example.splash.R;
 import com.example.splash.databinding.ActivityDriverHomeBinding;
 import com.example.splash.databinding.ActivityDriverLoginBinding;
 import com.example.splash.databinding.ActivityHomeBinding;
+import com.example.splash.model.DriverData;
+import com.example.splash.model.NotificationData;
+import com.example.splash.model.PushNotification;
 import com.example.splash.model.RequestData;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -77,6 +84,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -91,6 +99,9 @@ import java.util.Locale;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -108,9 +119,15 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
         binding = ActivityDriverHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        navHeader();
         //CreatepopUpwindow();
         adapter = new ViewAdapter(this);
         // binding.ViewPager.setAdapter(adapter);
+
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC);
+
+        //PushNotification notification = new PushNotification(new NotificationData("Hello","Check your requests"), TOPIC);
+        sendNotification();
 
 
         binding.toolBar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -135,16 +152,16 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
                 // int id = item.getItemId();
                 binding.drawLayout.closeDrawer(GravityCompat.START);
 
-
                 if (item.getItemId() == R.id.home) {
-                    Toast.makeText(DriverHomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),DriverHomeActivity.class));
                 }
                 if (item.getItemId() == R.id.profile) {
-                    Toast.makeText(DriverHomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
-                    //startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                    startActivity(new Intent(getApplicationContext(),DriverProfileActivity.class));
                 }
                 if (item.getItemId() == R.id.logout) {
+                    FirebaseAuth.getInstance().signOut();
                     Toast.makeText(DriverHomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), ControlActivity.class));
                 }
                 if (item.getItemId() == R.id.AllRequest) {
                     startActivity(new Intent(getApplicationContext(), AllRequestActivity.class));
@@ -264,13 +281,13 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
         }
         googleMp.setMyLocationEnabled(true);
 
-       /* googleMp.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+        googleMp.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
-               // CheckGps();
+                CheckGps();
                 return true;
             }
-        });*/
+        });
 
 
 
@@ -289,13 +306,10 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
                     double latitude,longitude;
                     latitude = requestData.getLatitude();
                     longitude = requestData.getLongitude();
-                    //Uri.parse("google.navigation:q=-23.839890999999998,29.390710999999996&model=1");
-
 
                     LatLng latLng = new LatLng(latitude, longitude);
                     MarkerOptions markerOptions = new MarkerOptions();
-
-
+                    
                     markerOptions.title("Client Location \n" );
                     markerOptions.position(latLng);
                     googleMap.addMarker(markerOptions);
@@ -303,7 +317,7 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
                     //Toast.makeText(DriverHomeActivity.this, markerOptions.toString(), Toast.LENGTH_SHORT).show();
 
 
-                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 0);
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
                     googleMap.animateCamera(cameraUpdate);
                 }
             }
@@ -401,10 +415,21 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-               // Toast.makeText(DriverHomeActivity.this, "Location:"+
-                //                locationResult.getLastLocation().getLatitude()+": "+
-                  //              locationResult.getLastLocation().getLongitude() ,
-                   //     Toast.LENGTH_SHORT).show();
+
+
+                LatLng latLng = new LatLng(locationResult.getLastLocation().getLatitude(), locationResult.getLastLocation().getLongitude());
+                MarkerOptions markerOptions = new MarkerOptions();
+
+                markerOptions.title("Current Location " );
+                markerOptions.position(latLng);
+                googleMp.addMarker(markerOptions);
+
+                //Toast.makeText(DriverHomeActivity.this, markerOptions.toString(), Toast.LENGTH_SHORT).show();
+
+
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
+                googleMp.animateCamera(cameraUpdate);
+
             }
         }, Looper.getMainLooper());
     }
@@ -448,6 +473,43 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
         return super.onOptionsItemSelected(item);
 
     }
+    private void navHeader(){
+
+        View headerView = binding.navigationView.getHeaderView(0);
+
+        ImageView imageProfile = headerView.findViewById(R.id.imageProfile);
+        TextView txtName = headerView.findViewById(R.id.txtName);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("DriverData");
+        reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DriverData driverData = snapshot.getValue(DriverData.class);
+                if(driverData!=null){
+                    String image1 = driverData.getImage();
+                    String name = driverData.getDriverName();
+                    String surname = driverData.getSurname();
+
+                    try{
+                        Picasso.get().load(image1).into(imageProfile);
+                        //Toast.makeText(DriverHomeActivity.this, image1, Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    txtName.setText(surname+" "+name);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+    }
+
 
     @SuppressLint("MissingInflatedId")
     private void CreatepopUpwindow() {
@@ -587,5 +649,24 @@ public class DriverHomeActivity extends AppCompatActivity implements OnMapReadyC
             }
         });
 
+    }
+    private void sendNotification() {
+        PushNotification notification = null;
+        ApiUtilities.getClient().sendNotification(notification).enqueue(new Callback<PushNotification>() {
+            @Override
+            public void onResponse(Call<PushNotification> call, Response<PushNotification> response) {
+                if (response.isSuccessful()) {
+
+                    Toast.makeText(DriverHomeActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(DriverHomeActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PushNotification> call, Throwable t) {
+                Toast.makeText(DriverHomeActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

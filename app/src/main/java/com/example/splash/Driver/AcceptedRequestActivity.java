@@ -14,20 +14,24 @@ import com.example.splash.Adapters.AcceptedRequestAdapter;
 import com.example.splash.Adapters.AllRequestAdapter;
 import com.example.splash.R;
 import com.example.splash.databinding.ActivityAcceptedRequestBinding;
+import com.example.splash.model.AcceptedData;
 import com.example.splash.model.RequestData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AcceptedRequestActivity extends AppCompatActivity {
     private DatabaseReference reference;
-    private List<RequestData> list;
+    private List<AcceptedData> list;
     private AcceptedRequestAdapter adapter;
+    private String uniqueId,image,name,surname,location;
+    private double latitude,longitude;
 
     private ActivityAcceptedRequestBinding binding;
     @Override
@@ -36,15 +40,18 @@ public class AcceptedRequestActivity extends AppCompatActivity {
         binding = ActivityAcceptedRequestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+
         binding.imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
                 binding.txtHome.setVisibility(View.GONE);
                 binding.inputSearch.setVisibility(View.VISIBLE);
             }
         });
 
-        reference = FirebaseDatabase.getInstance().getReference().child("RequstData");
+        reference = FirebaseDatabase.getInstance().getReference().child("AcceptedRequest");
 
         binding.inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -59,7 +66,7 @@ public class AcceptedRequestActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                filter(editable.toString());
+               // filter(editable.toString());
             }
         });
 
@@ -67,16 +74,16 @@ public class AcceptedRequestActivity extends AppCompatActivity {
 
 
     }
-    private void filter(String text) {
+ /*   private void filter(String text) {
 
-        List<RequestData> filterList = new ArrayList<>();
-        for(RequestData items : list){
+        List<AcceptedData> filterList = new ArrayList<>();
+        for(AcceptedData items : list){
             if(items.getLocation().toLowerCase().contains(text.toLowerCase())){
                 filterList.add(items);
             }
         }
         adapter.filterList(filterList);
-    }
+    }*/
     private void getData() {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,8 +94,8 @@ public class AcceptedRequestActivity extends AppCompatActivity {
 
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
 
-                    RequestData requestData = dataSnapshot.getValue(RequestData.class);
-                    list.add(requestData);
+                    AcceptedData acceptedData = dataSnapshot.getValue(AcceptedData.class);
+                    list.add(acceptedData);
 
 
                 }

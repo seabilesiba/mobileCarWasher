@@ -51,10 +51,10 @@ public class DriverLoginActivity extends AppCompatActivity {
        binding.logBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),DriverHomeActivity.class));
-                /*if(isValidDetails()){
+               // startActivity(new Intent(getApplicationContext(),DriverHomeActivity.class));
+                if(isValidDetails()){
                     sigIn();
-                }*/
+                }
             }
         });
     }
@@ -73,10 +73,10 @@ public class DriverLoginActivity extends AppCompatActivity {
     private void loading(Boolean isLoading){
         if(isLoading){
             binding.logBtn.setVisibility(View.INVISIBLE);
-            binding.pb.setVisibility(View.VISIBLE);
+            binding.pd.setVisibility(View.VISIBLE);
         }else{
             binding.logBtn.setVisibility(View.VISIBLE);
-            binding.pb.setVisibility(View.INVISIBLE);
+            binding.pd.setVisibility(View.INVISIBLE);
         }
     }
     private Boolean isValidDetails(){
@@ -106,7 +106,7 @@ public class DriverLoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                   // startActivity(new Intent(DriverLoginActivity.this, DriverHomeActivity.class));
+                    startActivity(new Intent(DriverLoginActivity.this, DriverHomeActivity.class));
                     loading(false);
                 }else{
                     showMessage("Something went wrong");

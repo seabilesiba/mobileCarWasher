@@ -31,13 +31,20 @@
             android:textSize="14sp"
             android:visibility="gone" />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgClientProfile"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/image_background"/>
+
+
         <TextView
-            android:id="@+id/txtHome"
-            android:layout_width="250dp"
+            android:id="@+id/txtClientName"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Chats"
+            android:text="Client Name"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />

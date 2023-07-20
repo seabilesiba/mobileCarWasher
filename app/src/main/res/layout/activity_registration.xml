@@ -20,35 +20,54 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/txtDriver"
             android:layout_marginTop="15dp"
-            android:text="Driver"
-            android:fontFamily="sans-serif"
+            android:text="Owner"
+            android:fontFamily="casual"
             android:textColor="#51A8EF"
             android:textSize="25dp"
             android:textStyle="bold"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgLogo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/logo1"
+        <FrameLayout
+            android:id="@+id/layoutImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
-           />
+            android:layout_gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/image_background"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/textAddImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Add Image"
+                android:textSize="10dp"
+                android:textColor="@color/secondary_text"/>
+
+        </FrameLayout>
+
+
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imgLogo"
+            android:layout_below="@id/layoutImage"
             android:layout_centerHorizontal="true"
             android:id="@+id/signUp"
-            android:fontFamily="sans-serif"
+            android:fontFamily="casual"
             android:layout_marginTop="0dp"
             android:text="@string/sign_up"
             android:textColor="#51A8EF"
             android:textSize="25dp"
             android:textStyle="bold"/>
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/company_name"
+            android:id="@+id/edtCompanyName"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
@@ -63,10 +82,10 @@
             />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_number"
+            android:id="@+id/edtRegNumber"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@id/company_name"
+            android:layout_below="@id/edtCompanyName"
             android:background="@drawable/edittext"
             android:layout_marginTop="15dp"
             android:drawablePadding="6dp"
@@ -74,14 +93,14 @@
             android:hint="Enter Company registration"
             android:textSize="13dp"
             android:paddingLeft="11dp"
-            android:inputType="text"
+            android:inputType="number"
             />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_email"
+            android:id="@+id/edtOwnerEmail"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@id/reg_number"
+            android:layout_below="@id/edtRegNumber"
             android:background="@drawable/edittext"
             android:layout_marginTop="15dp"
             android:hint="Enter email address"
@@ -91,12 +110,27 @@
             android:drawableLeft="@drawable/mail"
             android:inputType="textEmailAddress"
             />
-
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_password"
+            android:id="@+id/edtOwnerPhone"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@id/user_email"
+            android:layout_below="@id/edtOwnerEmail"
+            android:background="@drawable/edittext"
+            android:layout_marginTop="15dp"
+            android:hint="Enter Phone number"
+            android:textSize="13dp"
+            android:paddingLeft="10dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/round_local_phone_24"
+            android:drawableTint="@color/my_light_primary"
+            android:inputType="phone"
+            />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtOwnerPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/edtOwnerPhone"
             android:background="@drawable/edittext"
             android:layout_marginTop="15dp"
             android:hint="Password"
@@ -106,26 +140,13 @@
             android:drawableLeft="@drawable/pass"
             android:inputType="textPassword"
             />
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_confirmation"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@id/user_password"
-            android:background="@drawable/edittext"
-            android:layout_marginTop="15dp"
-            android:hint="@string/confirm_password"
-            android:textSize="13dp"
-            android:drawablePadding="5dp"
-            android:drawableStart="@drawable/pass"
-            android:paddingStart="10dp"
-            android:inputType="textPassword"
-            />
+
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/user_confirmation"
+            android:layout_below="@id/edtOwnerPassword"
             android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
@@ -146,7 +167,7 @@
             android:layout_marginTop="0dp">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/logBtn"
+                android:id="@+id/btnOwnerRegistration"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Register"
@@ -154,9 +175,11 @@
                 app:backgroundTint="#51A8EF"
                 app:cornerRadius="20dp" />
             <ProgressBar
-                android:id="@+id/pb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/pd"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:indeterminateDrawable="@drawable/progressbar_background2"
                 android:layout_gravity="center"
                 android:visibility="gone"/>
         </FrameLayout>

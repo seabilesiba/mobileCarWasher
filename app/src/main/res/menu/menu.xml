@@ -17,15 +17,9 @@
             <item
                 android:id="@+id/AllRequest"
                 android:icon="@drawable/accepted_request"
-                android:title="All"/>
-            <item
-                android:id="@+id/Accepted"
-                android:icon="@drawable/accepted_request"
-                android:title="accepted"/>
-            <item
-                android:id="@+id/Rejected"
-                android:icon="@drawable/rejected_request"
-                android:title="rejected"/>
+                android:title="Accepted"/>
+
+
         </menu>
     </item>
     <item android:title="Logout">

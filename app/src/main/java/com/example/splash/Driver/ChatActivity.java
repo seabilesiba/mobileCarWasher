@@ -16,7 +16,9 @@ import com.example.splash.Adapters.AcceptedRequestAdapter;
 import com.example.splash.Adapters.ChatAdapter;
 import com.example.splash.R;
 import com.example.splash.databinding.ActivityChatBinding;
+import com.example.splash.model.AcceptedData;
 import com.example.splash.model.ChatData;
+import com.example.splash.model.ConversationData;
 import com.example.splash.model.DriverData;
 import com.example.splash.model.RequestData;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,11 +48,29 @@ public class ChatActivity extends AppCompatActivity {
 
     private ActivityChatBinding binding;
     private String image,message,currentDate,time,DateTime;
+    private String uniqueId,image1,name,surname,location;
+    private double latitude,longitude;
+    String clientID ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        uniqueId = getIntent().getStringExtra("uniqueId");
+        image1 = getIntent().getStringExtra("image");
+        name = getIntent().getStringExtra("name");
+        surname = getIntent().getStringExtra("surname");
+        location = getIntent().getStringExtra("location");
+
+
+        try{
+             Picasso.get().load(image1).into(binding.imgClientProfile);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        binding.txtClientName.setText(surname+" "+ name);
 
         listener();
         //closeKeyboard();
@@ -131,10 +151,12 @@ public class ChatActivity extends AppCompatActivity {
         binding.layoutSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("ChatData");
+                //DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("ChatData");
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 String userID = auth.getCurrentUser().getUid();
-                final String key = mRef.push().getKey();
+                final String key = reference.push().getKey();
+                String uniqueId = getIntent().getStringExtra("uniqueId");
+                //Toast.makeText(ChatActivity.this, uniqueId, Toast.LENGTH_SHORT).show();
 
                 message = binding.inputMessage.getText().toString().trim();
                 Calendar calendar = Calendar.getInstance();
@@ -146,24 +168,128 @@ public class ChatActivity extends AppCompatActivity {
 
                 DateTime = currentDate+" at "+time;
 
-                ChatData chatData = new ChatData(message,DateTime,userID,key);
+               // private String message,date,driverId,clientId,key,key1;
+
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                        .getReference("AcceptedRequest");
 
 
-                mRef.child(key).setValue(chatData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                databaseReference.child(uniqueId).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()) {
-                            //Toast.makeText(ChatActivity.this, "success", Toast.LENGTH_SHORT).show();
-                            binding.inputMessage.setText("");
-                            closeKeyboard();
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        AcceptedData acceptedData = snapshot.getValue(AcceptedData.class);
+                        if(acceptedData!=null) {
+                            String clientID = acceptedData.getUniqueId();
+                            ChatData chatData = new ChatData(message,DateTime,userID,clientID,key);
+                            reference.child(key).setValue(chatData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        //Toast.makeText(ChatActivity.this, "success", Toast.LENGTH_SHORT).show();
+                                        binding.inputMessage.setText("");
+                                        closeKeyboard();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                        else {
+                            Toast.makeText(ChatActivity.this, "Snapshot is empty", Toast.LENGTH_SHORT).show();
                         }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
+
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
+
+               /* databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                            AcceptedData acceptedData = dataSnapshot.getValue(AcceptedData.class);
+                            if(acceptedData!=null){
+                                clientID = acceptedData.getUniqueId();
+
+                                ChatData chatData = new ChatData(message,DateTime,userID,clientID,key);
+                                reference.child(uniqueId).child(key).setValue(chatData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()) {
+                                            //Toast.makeText(ChatActivity.this, "success", Toast.LENGTH_SHORT).show();
+                                            binding.inputMessage.setText("");
+                                            closeKeyboard();
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });*/
+
+                /*  DatabaseReference reference = FirebaseDatabase.getInstance()
+                        .getReference("ChatData");
+
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                            ChatData chatData = dataSnapshot.getValue(ChatData.class);
+                            if(chatData!= null){
+                                String driverId = chatData.getDriverId();
+                                String clientId = chatData.getClientId();
+                                String message = chatData.getMessage();
+                                String date = chatData.getDate();
+                                String key1 = chatData.getKey();
+                                DatabaseReference dRef = FirebaseDatabase.getInstance()
+                                        .getReference("ConversationData");
+                                final String conversationId = reference.push().getKey();
+                                ConversationData conversationData = new ConversationData(conversationId,
+                                        driverId,clientId,message,date);
+                                dRef.child(clientId).child(key1).setValue(conversationData)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if(task.isSuccessful()){
+                                                            Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                        Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                    }
+                });*/
+
+
             }
 
         });

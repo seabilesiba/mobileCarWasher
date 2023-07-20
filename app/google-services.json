@@ -1,33 +1,62 @@
 {
   "project_info": {
-    "project_number": "1049661080839",
-    "project_id": "car-wash-45807",
-    "storage_bucket": "car-wash-45807.appspot.com"
+    "project_number": "146367454485",
+    "project_id": "car-washers-64bb9",
+    "storage_bucket": "car-washers-64bb9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1049661080839:android:73d635ce11f0cec82e71a2",
+        "mobilesdk_app_id": "1:146367454485:android:5771b7bdf8da5c64051d1c",
         "android_client_info": {
           "package_name": "com.example.splash"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1049661080839-61agpkmsvlbaa6tncln8t9cf7f8mcu0a.apps.googleusercontent.com",
+          "client_id": "146367454485-jiak2bku5v3p6irsiam1aahkugokongu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCW_F6DnmgK5yyJlL4V27gxv0bAOuQ2Hlg"
+          "current_key": "AIzaSyAEvtmn4LWCtAYk9SWMidgf-FG9kt3mR-8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1049661080839-61agpkmsvlbaa6tncln8t9cf7f8mcu0a.apps.googleusercontent.com",
+              "client_id": "146367454485-jiak2bku5v3p6irsiam1aahkugokongu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146367454485:android:6e7440f074bb6b07051d1c",
+        "android_client_info": {
+          "package_name": "com.example.userapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146367454485-jiak2bku5v3p6irsiam1aahkugokongu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEvtmn4LWCtAYk9SWMidgf-FG9kt3mR-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146367454485-jiak2bku5v3p6irsiam1aahkugokongu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
